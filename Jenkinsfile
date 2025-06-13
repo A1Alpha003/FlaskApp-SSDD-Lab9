@@ -1,23 +1,38 @@
 pipeline {
-agent any
-stages {
-stage(&#39;Build&#39;) {
-steps {
-echo &#39;Building..&#39;
-// Here you can define commands for your build
-  }
-}
-stage(&#39;Test&#39;) {
-steps {
-echo &#39;Testing..&#39;
-// Here you can define commands for your tests
-}
-}
-stage(&#39;Deploy&#39;) {
-steps {
-echo &#39;Deploying....&#39;
-// Here you can define commands for your deployment
-}
-}
-}
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the application...'
+                // Add commands for building the application, e.g., mvn clean install for a Maven project
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Add commands for running tests, e.g., npm test for a Node.js project
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                // Add commands for deployment, e.g., copying files to a server
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline completed.'
+        }
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
